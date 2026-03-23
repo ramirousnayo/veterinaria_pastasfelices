@@ -20,8 +20,8 @@ Sistema de gestión para clínicas veterinarias que permite llevar un registro d
 
 1. **Clonar el repositorio**:
    ```bash
-   git clone <url-del-repositorio>
-   cd veterinaria_patasfelices
+   git clone https://github.com/ramirousnayo/veterinaria_pastasfelices.git
+   cd veterinaria_pastasfelices
    ```
 
 2. **Crear y activar un entorno virtual**:
@@ -58,10 +58,37 @@ Sistema de gestión para clínicas veterinarias que permite llevar un registro d
 
 ## Estructura del Proyecto 📁
 
-- `config/`: Archivos de configuración del proyecto Django.
-- `fichas/`: Aplicación principal que contiene la lógica de negocio (modelos, vistas, urls).
-- `templates/`: Plantillas HTML para la interfaz de usuario.
-- `db.sqlite3`: Base de datos local (solo desarrollo).
+```text
+.
+├── config/                 # Configuración del proyecto Django
+│   ├── settings/           # Ajustes divididos por entorno
+│   │   ├── base.py
+│   │   ├── local.py
+│   │   └── production.py
+│   ├── asgi.py
+│   ├── urls.py
+│   └── wsgi.py
+├── fichas/                 # Aplicación principal de registros veterinarios
+│   ├── fixtures/           # Datos iniciales para la base de datos
+│   │   └── datos_iniciales.json
+│   ├── migrations/         # Migraciones de base de datos
+│   ├── admin.py            # Configuración del panel de administración
+│   ├── apps.py
+│   ├── models.py           # Modelos: Dueño, Mascota, ConsultaMedica
+│   ├── urls.py             # URLs específicas de la app fichas
+│   └── views.py            # Lógica de las vistas (CBV y funciones)
+├── templates/              # Plantillas HTML
+│   └── fichas/             # Vistas de la aplicación
+│       ├── base.html       # Estructura base compartida
+│       ├── inicio.html     # Dashboard principal
+│       ├── dueno_*.html    # Plantillas para la gestión de dueños
+│       ├── mascota_*.html  # Plantillas para la gestión de mascotas
+│       └── consulta_*.html # Plantillas para la gestión de consultas
+├── manage.py               # Script de gestión de Django
+├── requirements.txt        # Dependencias del proyecto
+├── .env.example            # Ejemplo de configuración para variables de entorno
+└── .gitignore              # Archivos ignorados por Git
+```
 
 ## Vistas Disponibles 🖥️
 
