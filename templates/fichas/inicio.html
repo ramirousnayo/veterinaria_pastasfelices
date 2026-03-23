@@ -1,0 +1,29 @@
+{% extends 'fichas/base.html' %}
+
+{% block title %}Inicio - Patas Felices{% endblock %}
+
+{% block content %}
+<h1>Bienvenido a Patas Felices 🐾</h1>
+
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem;">
+    <div class="card" style="text-align: center;">
+        <p style="font-size: 2.5rem; font-weight: 700; color: #2c7a7b;">{{ total_duenos }}</p>
+        <p>Dueños registrados</p>
+    </div>
+    <div class="card" style="text-align: center;">
+        <p style="font-size: 2.5rem; font-weight: 700; color: #2c7a7b;">{{ total_mascotas }}</p>
+        <p>Mascotas registradas</p>
+    </div>
+    <div class="card" style="text-align: center;">
+        <p style="font-size: 2.5rem; font-weight: 700; color: #2c7a7b;">{{ total_consultas }}</p>
+        <p>Consultas realizadas</p>
+    </div>
+</div>
+
+<h2 style="margin-bottom: 1rem; color: #2c7a7b;">Accesos rápidos</h2>
+<div class="actions">
+    <a href="{% url 'fichas:dueno_crear' %}" class="btn btn-primary">+ Nuevo Dueño</a>
+    <a href="{% url 'fichas:mascota_crear' %}" class="btn btn-primary">+ Nueva Mascota</a>
+    <a href="{% url 'fichas:consulta_crear' %}" class="btn btn-primary">+ Nueva Consulta</a>
+</div>
+{% endblock %}

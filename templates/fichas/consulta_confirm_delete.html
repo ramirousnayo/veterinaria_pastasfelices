@@ -1,0 +1,20 @@
+{% extends 'fichas/base.html' %}
+
+{% block title %}Eliminar Consulta{% endblock %}
+
+{% block content %}
+<h1>Eliminar Consulta</h1>
+
+<div class="card">
+    <p>¿Estás seguro de que deseas eliminar la consulta de <strong>{{ object.mascota.nombre }}</strong>?</p>
+    <p class="empty" style="margin-top: 0.5rem;">Motivo: {{ object.motivo }}</p>
+
+    <form method="post" style="margin-top: 1.5rem;">
+        {% csrf_token %}
+        <div class="actions">
+            <button type="submit" class="btn btn-danger">Confirmar eliminación</button>
+            <a href="{% url 'fichas:consulta_lista' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

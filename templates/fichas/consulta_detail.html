@@ -1,0 +1,27 @@
+{% extends 'fichas/base.html' %}
+
+{% block title %}Consulta - {{ consulta.mascota.nombre }}{% endblock %}
+
+{% block content %}
+<h1>Consulta de {{ consulta.mascota.nombre }}</h1>
+
+<div class="card">
+    <p><strong>Mascota:</strong>
+        <a href="{% url 'fichas:mascota_detalle' consulta.mascota.pk %}">{{ consulta.mascota.nombre }}</a>
+    </p>
+    <p><strong>Fecha:</strong> {{ consulta.fecha|date:"d/m/Y H:i" }}</p>
+    <p><strong>Motivo:</strong> {{ consulta.motivo }}</p>
+    <p><strong>Diagnóstico:</strong> {{ consulta.diagnostico }}</p>
+    <p><strong>Tratamiento:</strong> {{ consulta.tratamiento }}</p>
+    <p><strong>Costo:</strong> ${{ consulta.costo }}</p>
+</div>
+
+<div class="actions" style="margin-bottom: 1.5rem;">
+    <a href="{% url 'fichas:consulta_editar' consulta.pk %}" class="btn btn-warning">Editar</a>
+    <a href="{% url 'fichas:consulta_eliminar' consulta.pk %}" class="btn btn-danger">Eliminar</a>
+</div>
+
+<div style="margin-top: 1.5rem;">
+    <a href="{% url 'fichas:consulta_lista' %}" class="btn btn-secondary">← Volver</a>
+</div>
+{% endblock %}
