@@ -1,0 +1,38 @@
+{% extends 'fichas/base.html' %}
+
+{% block title %}Lista de Mascotas{% endblock %}
+
+{% block content %}
+<h1>Mascotas registradas</h1>
+
+{% if mascotas %}
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Especie</th>
+            <th>Raza</th>
+            <th>Dueño</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for mascota in mascotas %}
+        <tr>
+            <td>{{ mascota.nombre }}</td>
+            <td>{{ mascota.especie }}</td>
+            <td>{{ mascota.raza }}</td>
+            <td>{{ mascota.dueno.nombre }}</td>
+            <td class="actions">
+                <a href="{% url 'fichas:mascota_detalle' mascota.pk %}" class="btn btn-primary">Ver</a>
+                <a href="{% url 'fichas:mascota_editar' mascota.pk %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'fichas:mascota_eliminar' mascota.pk %}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="empty">No hay mascotas registradas aún.</p>
+{% endif %}
+{% endblock %}

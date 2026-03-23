@@ -1,0 +1,18 @@
+{% extends 'fichas/base.html' %}
+
+{% block title %}{% if object %}Editar Dueño{% else %}Nuevo Dueño{% endif %}{% endblock %}
+
+{% block content %}
+<h1>{% if object %}Editar Dueño{% else %}Nuevo Dueño{% endif %}</h1>
+
+<div class="card">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="{% url 'fichas:dueno_lista' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}
