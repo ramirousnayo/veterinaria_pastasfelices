@@ -1,0 +1,81 @@
+[
+    {
+        "model": "fichas.dueno",
+        "pk": 1,
+        "fields": {
+            "nombre": "Carlos Pérez",
+            "rut": "12.345.678-9",
+            "telefono": "+56912345678",
+            "email": "carlos@email.com",
+            "direccion": "Av. Principal 123"
+        }
+    },
+    {
+        "model": "fichas.dueno",
+        "pk": 2,
+        "fields": {
+            "nombre": "María González",
+            "rut": "98.765.432-1",
+            "telefono": "+56987654321",
+            "email": "maria@email.com",
+            "direccion": "Calle Secundaria 456"
+        }
+    },
+    {
+        "model": "fichas.mascota",
+        "pk": 1,
+        "fields": {
+            "nombre": "Firulais",
+            "especie": "Perro",
+            "raza": "Labrador",
+            "fecha_nacimiento": "2020-03-15",
+            "dueno": 1
+        }
+    },
+    {
+        "model": "fichas.mascota",
+        "pk": 2,
+        "fields": {
+            "nombre": "Michi",
+            "especie": "Gato",
+            "raza": "Siamés",
+            "fecha_nacimiento": "2021-07-20",
+            "dueno": 1
+        }
+    },
+    {
+        "model": "fichas.mascota",
+        "pk": 3,
+        "fields": {
+            "nombre": "Piolín",
+            "especie": "Ave",
+            "raza": "Canario",
+            "fecha_nacimiento": "2022-01-10",
+            "dueno": 2
+        }
+    },
+    {
+        "model": "fichas.consultamedica",
+        "pk": 1,
+        "fields": {
+            "mascota": 1,
+            "fecha": "2024-01-15T10:30:00",
+            "motivo": "Vacunación anual",
+            "diagnostico": "Paciente sano, se aplica vacuna antirrábica",
+            "tratamiento": "Vacuna antirrábica",
+            "costo": "25000.00"
+        }
+    },
+    {
+        "model": "fichas.consultamedica",
+        "pk": 2,
+        "fields": {
+            "mascota": 2,
+            "fecha": "2024-02-20T14:00:00",
+            "motivo": "Control de rutina",
+            "diagnostico": "Paciente en buen estado general",
+            "tratamiento": "Sin tratamiento requerido",
+            "costo": "15000.00"
+        }
+    }
+]
