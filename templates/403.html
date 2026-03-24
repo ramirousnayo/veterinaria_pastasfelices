@@ -1,0 +1,14 @@
+{% extends 'fichas/base.html' %}
+
+{% block title %}403 - Acceso Denegado{% endblock %}
+
+{% block content %}
+<div style="text-align: center; padding: 3rem;">
+    <h1 style="font-size: 5rem; color: #dc2626;">403</h1>
+    <h2 style="color: #2c7a7b; margin-bottom: 1rem;">Acceso Denegado</h2>
+    <p style="color: #718096; margin-bottom: 2rem;">
+        No tienes los permisos necesarios para ver esta página.
+    </p>
+    <a href="{% url 'fichas:dueno_lista' %}" class="btn btn-primary">← Volver al inicio</a>
+</div>
+{% endblock %}
