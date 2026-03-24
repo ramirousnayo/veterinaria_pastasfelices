@@ -1,0 +1,17 @@
+{% extends 'fichas/base.html' %}
+
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+<h1>Iniciar Sesión</h1>
+
+<div class="card" style="max-width: 400px; margin: 0 auto;">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="actions">
+            <button type="submit" class="btn btn-primary">Entrar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

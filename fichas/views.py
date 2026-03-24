@@ -1,9 +1,9 @@
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Dueno, Mascota
-from .models import Dueno, Mascota, ConsultaMedica
 from django.shortcuts import render
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from .models import Dueno, Mascota, ConsultaMedica
 
 
 
@@ -42,10 +42,11 @@ class DuenoUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class DuenoDeleteView(DeleteView):
+class DuenoDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Dueno
     template_name = 'fichas/dueno_confirm_delete.html'
     success_url = reverse_lazy('fichas:dueno_lista')
+    permission_required = 'fichas.delete_dueno'
 
     def form_valid(self, form):
         messages.success(self.request, 'Dueño eliminado correctamente.')
@@ -86,10 +87,11 @@ class MascotaUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class MascotaDeleteView(DeleteView):
+class MascotaDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Mascota
     template_name = 'fichas/mascota_confirm_delete.html'
     success_url = reverse_lazy('fichas:mascota_lista')
+    permission_required = 'fichas.delete_mascota'
 
     def form_valid(self, form):
         messages.success(self.request, 'Mascota eliminada correctamente.')
