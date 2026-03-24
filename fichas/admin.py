@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 from django.db.models import Sum
 from .models import Dueno, Mascota, ConsultaMedica
 
@@ -30,12 +32,31 @@ class DuenoAdmin(admin.ModelAdmin):
     cantidad_mascotas.short_description = 'Mascotas'
 
 
+# ── Filtros Personalizados ────────────────────────────────────
+class ConsultaFilter(admin.SimpleListFilter):
+    title = 'Consultas'
+    parameter_name = 'tiene_consultas'
+
+    def lookups(self, request, model_admin):
+        return (
+            ('si', 'Con consultas'),
+            ('no', 'Sin consultas'),
+        )
+
+    def queryset(self, request, queryset):
+        if self.value() == 'si':
+            return queryset.filter(consultamedica__isnull=False).distinct()
+        if self.value() == 'no':
+            return queryset.filter(consultamedica__isnull=True)
+        return queryset
+
+
 # ── MascotaAdmin ──────────────────────────────────────────────
 @admin.register(Mascota)
 class MascotaAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'especie', 'raza', 'dueno', 'costo_total_consultas']
     search_fields = ['nombre', 'dueno__nombre']
-    list_filter = ['especie']
+    list_filter = ['especie', ConsultaFilter]
     ordering = ['nombre']
     inlines = [ConsultaInline]
 
@@ -59,6 +80,15 @@ class ConsultaMedicaAdmin(admin.ModelAdmin):
         total = queryset.update(costo=0)
         self.message_user(request, f'{total} consulta(s) marcadas como sin costo.')
     marcar_sin_costo.short_description = 'Marcar como sin costo'
+
+
+# ── UserAdmin personalizado ───────────────────────────────────
+class CustomUserAdmin(UserAdmin):
+    list_display = ['username', 'email', 'first_name', 'last_name', 'is_staff', 'is_active']
+    list_filter = ['is_staff', 'is_superuser', 'is_active']
+
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
 
 
 # ── Identidad del panel ───────────────────────────────────────
