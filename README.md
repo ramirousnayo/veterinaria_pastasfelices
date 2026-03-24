@@ -5,9 +5,13 @@ Sistema de gestión para clínicas veterinarias que permite llevar un registro d
 ## Características 🚀
 
 - **Gestión de Dueños**: Registro completo de propietarios (Nombre, RUT, Teléfono, Email, Dirección).
-- **Gestión de Mascotas**: Registro de pacientes (Nombre, Especie, Raza, Fecha de Nacimiento) vinculados a sus dueños.
+- **Gestión de Mascotas**: Registro de pacientes (Nombre, Especie, Raza, Fecha de Nacimiento) vinculados a sus dueños con filtros avanzados.
 - **Consultas Médicas**: Historial de atenciones médicas con detalle de motivo, diagnóstico, tratamiento y costo.
-- **Panel de Control**: Resumen rápido con el total de registros en el sistema.
+- **Autenticación y Permisos**: Vistas protegidas con `LoginRequiredMixin` y permisos específicos para eliminación de registros.
+- **Panel de Administración Extendido**:
+  - `UserAdmin` personalizado para una mejor gestión de usuarios del sistema.
+  - Filtros personalizados (`SimpleListFilter`) para segmentar mascotas con/sin consultas.
+- **Sistema de Señales**: Registro automático en consola (`post_save`) al crear o modificar dueños.
 
 ## Requisitos Técnicos 🛠️
 
@@ -63,7 +67,7 @@ Sistema de gestión para clínicas veterinarias que permite llevar un registro d
 ├── config/                 # Configuración del proyecto Django
 │   ├── settings/           # Ajustes divididos por entorno
 │   │   ├── base.py
-│   │   ├── local.py
+│   │   ├── development.py
 │   │   └── production.py
 │   ├── asgi.py
 │   ├── urls.py
@@ -75,20 +79,34 @@ Sistema de gestión para clínicas veterinarias que permite llevar un registro d
 │   ├── admin.py            # Configuración del panel de administración
 │   ├── apps.py
 │   ├── models.py           # Modelos: Dueño, Mascota, ConsultaMedica
+│   ├── signals.py          # Registro de señales (post_save)
 │   ├── urls.py             # URLs específicas de la app fichas
 │   └── views.py            # Lógica de las vistas (CBV y funciones)
 ├── templates/              # Plantillas HTML
-│   └── fichas/             # Vistas de la aplicación
-│       ├── base.html       # Estructura base compartida
-│       ├── inicio.html     # Dashboard principal
-│       ├── dueno_*.html    # Plantillas para la gestión de dueños
-│       ├── mascota_*.html  # Plantillas para la gestión de mascotas
-│       └── consulta_*.html # Plantillas para la gestión de consultas
+│   ├── fichas/             # Vistas de la aplicación
+│   │   ├── base.html       # Estructura base compartida
+│   │   ├── inicio.html     # Dashboard principal
+│   │   ├── dueno_list.html
+│   │   ├── dueno_detail.html
+│   │   ├── dueno_form.html
+│   │   ├── dueno_confirm_delete.html
+│   │   ├── mascota_list.html
+│   │   ├── mascota_detail.html
+│   │   ├── mascota_form.html
+│   │   ├── mascota_confirm_delete.html
+│   │   ├── consulta_list.html
+│   │   ├── consulta_detail.html
+│   │   ├── consulta_form.html
+│   │   └── consulta_confirm_delete.html
+│   └── registration/       # Vistas de autenticación y errores
+│       ├── login.html      # Formulario de inicio de sesión
+│       └── 403.html        # Error de acceso denegado
 ├── manage.py               # Script de gestión de Django
 ├── requirements.txt        # Dependencias del proyecto
 ├── .env.example            # Ejemplo de configuración para variables de entorno
 └── .gitignore              # Archivos ignorados por Git
 ```
+
 
 ## Vistas Disponibles 🖥️
 
